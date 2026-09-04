@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlog</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <a href="index.html" class="brand">wanderlog.</a>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="#trips">My Trips</a>
+        <a href="#add-trip">Add Trip</a>
+        <a href="profile.html?user=traveler">Profile</a>
+    </nav>
+</header>
+
+
+<main>
+
+    <section class="intro">
+        <p class="small-text">MY TRAVEL JOURNAL</p>
+
+        <h1>Places I've explored.</h1>
+
+        <p>
+            Keep your favourite journeys, memories and photographs
+            all in one place.
+        </p>
+
+        <a href="#add-trip" class="button">+ Add a trip</a>
+    </section>
+
+
+    <!-- ADD / EDIT TRIP -->
+
+    <section id="add-trip" class="form-section">
+
+        <h2>Add a new trip</h2>
+
+        <form id="tripForm">
+
+            <input type="hidden" id="tripId">
+
+            <label for="title">Trip title</label>
+            <input
+                type="text"
+                id="title"
+                placeholder="My Goa Adventure"
+                required
+            >
+
+            <label for="destination">Destination</label>
+            <input
+                type="text"
+                id="destination"
+                placeholder="Goa, India"
+                required
+            >
+
+            <label for="date">Date</label>
+            <input
+                type="date"
+                id="date"
+                required
+            >
+
+            <label for="notes">Notes</label>
+            <textarea
+                id="notes"
+                placeholder="Write something about your trip..."
+            ></textarea>
+
+
+            <!-- PHOTO INPUT -->
+
+            <label for="image">Cover photo</label>
+
+            <input
+                type="file"
+                id="image"
+                accept="image/*"
+            >
+
+            <!-- PREVIEW -->
+
+            <div id="imagePreview" class="image-preview">
+                <span>Photo preview will appear here</span>
+            </div>
+
+
+            <div class="form-buttons">
+
+                <button type="submit" class="button">
+                    <span id="submitText">Save Trip</span>
+                </button>
+
+                <button
+                    type="button"
+                    id="cancelBtn"
+                    class="cancel-button"
+                    style="display:none;"
+                >
+                    Cancel
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+
+    <!-- TRIPS -->
+
+    <section id="trips" class="trips-section">
+
+        <div class="section-heading">
+            <div>
+                <p class="small-text">MEMORIES</p>
+                <h2>My trips</h2>
+            </div>
+        </div>
+
+        <div id="tripList" class="trip-list"></div>
+
+        <p id="emptyMessage" class="empty-message">
+            No trips added yet. Start your travel journal!
+        </p>
+
+    </section>
+
+</main>
+
+
+<footer>
+    <p>Made with memories · wanderlog.</p>
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

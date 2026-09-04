@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Traveler Profile - Wanderlog</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+
+    <a href="index.html" class="brand">
+        wanderlog.
+    </a>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html#trips">Trips</a>
+    </nav>
+
+</header>
+
+
+<main>
+
+    <section class="intro">
+
+        <p class="small-text">PUBLIC PROFILE</p>
+
+        <h1 id="profileName">
+            Traveler
+        </h1>
+
+        <p id="profileBio">
+            A traveler collecting memories from different places.
+        </p>
+
+    </section>
+
+
+    <section class="trips-section">
+
+        <p class="small-text">TRAVEL JOURNAL</p>
+
+        <h2>My journeys</h2>
+
+        <div id="profileTrips" class="trip-list"></div>
+
+        <p id="profileEmpty" class="empty-message">
+            This traveler has not added any trips yet.
+        </p>
+
+    </section>
+
+</main>
+
+
+<footer>
+    <p>Wanderlog · Public Travel Journal</p>
+</footer>
+
+
+<script>
+
+    // Read user from URL
+
+    const params = new URLSearchParams(window.location.search);
+
+    const username = params.get("user") || "traveler";
+
+
+    // Profile information
+
+    const profiles = {
+        traveler: {
+            name: "Abhishek",
+            bio: "Exploring new places, collecting memories and enjoying the journey."
+        }
+    };
+
+
+    const profile =
+        profiles[username] || profiles.traveler;
+
+
+    document.getElementById("profileName").textContent =
+        profile.name;
+
+    document.getElementById("profileBio").textContent =
+        profile.bio;
+
+
+    // Get trips from localStorage
+
+    const trips =
+        JSON.parse(localStorage.getItem("wanderlogTrips")) || [];
+
+
+    const profileTrips =
+        document.getElementById("profileTrips");
+
+    const profileEmpty =
+        document.getElementById("profileEmpty");
+
+
+    if (trips.length === 0) {
+
+        profileEmpty.style.display = "block";
+
+    } else {
+
+        profileEmpty.style.display = "none";
+
+
+        trips.forEach(function (trip) {
+
+            const card = document.createElement("article");
+            card.className = "trip-card";
+
+
+            const image = document.createElement("img");
+
+            image.className = "trip-image";
+
+            image.src =
+                trip.image ||
+                "https://via.placeholder.com/600x400?text=Wanderlog";
+
+            image.alt = trip.title;
+
+
+            image.onerror = function () {
+
+                image.src =
+                    "https://via.placeholder.com/600x400?text=Image+Unavailable";
+
+            };
+
+
+            const content = document.createElement("div");
+
+            content.className = "trip-content";
+
+
+            const title = document.createElement("h3");
+
+            title.textContent = trip.title;
+
+
+            const destination = document.createElement("p");
+
+            destination.className = "destination";
+
+            destination.textContent = trip.destination;
+
+
+            const date = document.createElement("p");
+
+            date.className = "trip-date";
+
+            date.textContent = trip.date;
+
+
+            const notes = document.createElement("p");
+
+            notes.className = "trip-notes";
+
+            notes.textContent =
+                trip.notes || "No notes added.";
+
+
+            content.appendChild(title);
+            content.appendChild(destination);
+            content.appendChild(date);
+            content.appendChild(notes);
+
+
+            card.appendChild(image);
+            card.appendChild(content);
+
+
+            profileTrips.appendChild(card);
+
+        });
+
+    }
+
+</script>
+
+</body>
+</html>
